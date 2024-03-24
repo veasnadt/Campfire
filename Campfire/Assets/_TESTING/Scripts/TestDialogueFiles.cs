@@ -6,6 +6,7 @@ using DIALOGUE;
 
 public class TestDialogueFiles : MonoBehaviour
 {
+    [SerializeField] private TextAsset fileToRead = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +15,7 @@ public class TestDialogueFiles : MonoBehaviour
 
     void StartConversation()
     {
-        List<string> lines = FileManager.ReadTextAsset("textFile");
+        List<string> lines = FileManager.ReadTextAsset(fileToRead);
 
         DialogueSystem.instance.Say(lines);
 

@@ -14,7 +14,7 @@ namespace DIALOGUE
         public delegate void DialogueSystemEvent();
         public event DialogueSystemEvent onUserPrompt_Next;
 
-        public static DialogueSystem instance;
+        public static DialogueSystem instance { get; private set; }
 
         public bool isRunningConversation => conversationManager.isRunning;
 

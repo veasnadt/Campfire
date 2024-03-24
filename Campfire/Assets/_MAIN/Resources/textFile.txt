@@ -1,17 +1,3 @@
-John "Did you tell him you were going to ask Helen to marry you?"
+John "What the fish... {a} You know that could've killed you."
 
-Jerry "Could have."
-
-John "But you aren’t."
-
-Jerry "Didn’t."
-
-John "And she got upset."
-
-Jerry "Ran into her bedroom and slammed the door. Hit me first, actually."
-
-John "Good for her."
-
-Jerry "Sucker punched me."
-
-John "Ouch."
+Jerry "I know." {c} It was really worth it though. {wa 1} It meant everything to me."

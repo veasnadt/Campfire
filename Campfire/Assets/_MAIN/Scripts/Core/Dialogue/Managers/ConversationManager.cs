@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace DIALOGUE
@@ -57,7 +58,7 @@ namespace DIALOGUE
                 if (line.hasCommands)
                     yield return Line_RunCommands(line);
 
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(2);
             }
         }
 
@@ -66,11 +67,9 @@ namespace DIALOGUE
             //Show or hide speaker's name whether if it is present in the line
             if (line.hasSpeaker)
                 dialogueSystem.ShowSpeakerName(line.speaker);
-            else
-                dialogueSystem.HideSpeakerName();
 
             //Build dialogue
-            yield return BuildDialogue(line.dialogue);
+            yield return BuildLineSegments(line.dialogue);
 
             //Wait for user input
             yield return WaitForUserInput();
@@ -82,10 +81,41 @@ namespace DIALOGUE
             yield return null;
         }
 
-        IEnumerator BuildDialogue(string dialogue)
+        IEnumerator BuildLineSegments(DL_DIALOGUE_DATA line)
         {
-            architect.Build(dialogue);
+            for (int i = 0; i < line.segments.Count; i++)
+            {
+                DL_DIALOGUE_DATA.DIALOGUE_SEGMENT segment = line.segments[i];
 
+                yield return WaitForDialogueSegmentSignalToBeTrigger(segment);
+
+                yield return BuildDialogue(segment.dialogue, segment.appendText);
+            }
+        }
+
+        IEnumerator WaitForDialogueSegmentSignalToBeTrigger(DL_DIALOGUE_DATA.DIALOGUE_SEGMENT segment)
+        {
+            switch(segment.startSignal)
+            {
+                case DL_DIALOGUE_DATA.DIALOGUE_SEGMENT.StartSignal.C:
+                case DL_DIALOGUE_DATA.DIALOGUE_SEGMENT.StartSignal.A:
+                    yield return WaitForUserInput();
+                    break;
+                case DL_DIALOGUE_DATA.DIALOGUE_SEGMENT.StartSignal.WC:
+                case DL_DIALOGUE_DATA.DIALOGUE_SEGMENT.StartSignal.WA:
+                    yield return new WaitForSeconds(segment.signalDelay);
+                    break;
+                default:
+                    break;
+            }
+        }
+        IEnumerator BuildDialogue(string dialogue, bool append = false)
+        {
+            if (!append)
+                architect.Build(dialogue);
+            else
+                architect.Append(dialogue);
+     
             while (architect.isBuilding)
             {
                 if (userPrompt)

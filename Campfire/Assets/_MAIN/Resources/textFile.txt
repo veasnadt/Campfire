@@ -1,0 +1,7 @@
+John "Hello World!" list(items)
+
+setScene("Classroom" -s)
+
+Jerry "Hey, didn't you say \"Hello world!\" like 5 minutes ago?"
+
+Narrator "He did."

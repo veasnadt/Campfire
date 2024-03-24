@@ -87,7 +87,6 @@ public class TextArchitect
             case BuildMethod.fade:
                 yield return Build_Fade();
                 break;
-            
         }
 
         OnComplete();

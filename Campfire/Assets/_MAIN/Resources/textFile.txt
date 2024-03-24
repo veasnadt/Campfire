@@ -1,3 +1,29 @@
-John "What the fish... {a} You know that could've killed you."
+"Phone is ringing..."
 
-Jerry "I know." {c} It was really worth it though. {wa 1} It meant everything to me."
+You "Veronica Rivas, private investigator. {wa 3} How can I help you?"
+
+Caller "H-hello? I need someone to find my daughter. {c} She hasn’t been answering my calls but the police say the property looks fine and they’re not going to investigate further. {c} They say she’s not there, but I know she’d tell me if she decided to travel. {c} Could you please go out to [REDACTED] and find out what happened?"
+
+"You and your partner, Herschel Simmons, go out to the cabin and decide to set up their tent since it's a large area and they expect it to take a while."
+
+Herschel "I can’t believe how far out this is. Who the hell would want to live here?"
+
+You "The path up here’s not even accessible to cars. How does she get around?"
+
+Herschel "She can’t make that walk down to the road every day, so maybe something went wrong with her phone lines and she hasn’t bothered to fix it yet."
+
+You "But the police said they didn’t find anyone at the cabin. No one knows where she is."
+
+Herschel "This property is bigger than I expected. It'll take a long time to search the woods."
+
+You "Guess we should set up camp, like I suggested on the way up. We’re miles away from the closest neighbors and I sure as hell am not walking down that hill in the dark."
+
+Herschel "Fine, do what you want."
+
+"You and Herschel begin to set up camp."
+
+You "We should start searching before it gets too late."
+
+Hershel "Should we check the cabin or the surrounding property first?"
+
+"Go inside the cabin or further investigate outside?"

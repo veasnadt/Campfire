@@ -116,7 +116,8 @@ namespace DIALOGUE
             else
                 architect.Append(dialogue);
      
-            while (architect.isBuilding)
+            yield return null;
+            /*while (architect.isBuilding)
             {
                 if (userPrompt)
                 {
@@ -128,7 +129,7 @@ namespace DIALOGUE
                     userPrompt = false;
                 }
                 yield return null;
-            }
+            }*/
         }
 
         IEnumerator WaitForUserInput()

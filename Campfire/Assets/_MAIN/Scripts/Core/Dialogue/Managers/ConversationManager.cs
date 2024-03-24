@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DIALOGUE{
+namespace DIALOGUE
+{
     public class ConversationManager
     {
         private DialogueSystem dialogueSystem => DialogueSystem.instance;
@@ -39,9 +40,10 @@ namespace DIALOGUE{
 
         IEnumerator RunningConversation(List<string> conversation)
         {
-            //Don't display blank lines or run logic on them.
             for (int i = 0; i < conversation.Count; i++)
             {
+                Debug.Log("Line: " + i + " Content: " + conversation[i]);
+                //Don't display blank lines or run logic on them.
                 if (string.IsNullOrWhiteSpace(conversation[i]))
                     continue;
 
@@ -55,7 +57,7 @@ namespace DIALOGUE{
                 if (line.hasCommands)
                     yield return Line_RunCommands(line);
 
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(3);
             }
         }
 
@@ -68,19 +70,10 @@ namespace DIALOGUE{
                 dialogueSystem.HideSpeakerName();
 
             //Build dialogue
-            architect.Build(line.dialogue);
+            yield return BuildDialogue(line.dialogue);
 
-            while (architect.isBuilding)
-            {
-                if (!architect.hurryUp)
-                    architect.hurryUp = true;
-                else
-                    architect.ForceComplete();
-
-                userPrompt = false;
-                
-                yield return BuildDialogue(line.dialogue);
-            }
+            //Wait for user input
+            yield return WaitForUserInput();
         }
 
         IEnumerator Line_RunCommands(DIALOGUE_LINE line)
@@ -98,14 +91,22 @@ namespace DIALOGUE{
                 if (userPrompt)
                 {
                     if (!architect.hurryUp)
-                        architect.hurryUp = false;
+                        architect.hurryUp = true;
                     else 
                         architect.ForceComplete();
 
                     userPrompt = false;
                 }
+                yield return null;
             }
-            yield return null;
+        }
+
+        IEnumerator WaitForUserInput()
+        {
+            while (!userPrompt)
+                yield return null;
+
+            userPrompt = false;
         }
     }
 }

@@ -1,5 +1,17 @@
-John "Hello World!" list(items -h)
+John "Did you tell him you were going to ask Helen to marry you?"
 
-Jerry "Hey, didn't you say \"Hello world!\" like 5 minutes ago?"
+Jerry "Could have."
 
-Narrator "He did."
+John "But you aren’t."
+
+Jerry "Didn’t."
+
+John "And she got upset."
+
+Jerry "Ran into her bedroom and slammed the door. Hit me first, actually."
+
+John "Good for her."
+
+Jerry "Sucker punched me."
+
+John "Ouch."

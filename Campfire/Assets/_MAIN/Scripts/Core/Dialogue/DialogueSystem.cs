@@ -51,7 +51,7 @@ namespace DIALOGUE
 
         public void Say(string speaker, string dialogue)
         {
-            List<string> conversation = new List<string>() { $"{speaker} \"{dialogue}\""};
+            List<string> conversation = new List<string>() { $"{speaker} \"{dialogue}\"" };
             Say(conversation);
         }
 

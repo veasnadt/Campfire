@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DIALOGUE {
+namespace DIALOGUE 
+{
     public class DIALOGUE_LINE
     {
         public string speaker;

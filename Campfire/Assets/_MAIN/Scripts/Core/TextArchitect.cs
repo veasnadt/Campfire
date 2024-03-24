@@ -24,7 +24,7 @@ public class TextArchitect
     private const float baseSpeed = 1;
     private float speedMultiplier = 1;
 
-    public int charactersPerCycle { get { return speed <= 2f ? characterMultiplier : speed <= 2.5f ? characterMultiplier * 2 : characterMultiplier * 3; }}
+    public int charactersPerCycle { get { return speed <= 2f ? characterMultiplier : speed <= 2.5f ? characterMultiplier * 2 : characterMultiplier * 3; } }
     private int characterMultiplier = 1;
 
     public bool hurryUp = false;
@@ -89,11 +89,14 @@ public class TextArchitect
                 break;
             
         }
+
+        OnComplete();
     }
 
     private void OnComplete()
     {
         buildProcess = null;
+        hurryUp = false;
     }
 
     public void ForceComplete() 
@@ -164,7 +167,7 @@ public class TextArchitect
         {
             tmpro.maxVisibleCharacters += hurryUp ? charactersPerCycle * 5 : charactersPerCycle;
 
-            yield return new WaitForSeconds(0.015f / speed);
+            yield return new WaitForSeconds(0.02f / speed);
         }
     }
 

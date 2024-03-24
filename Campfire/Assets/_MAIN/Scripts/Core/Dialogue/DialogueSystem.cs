@@ -11,6 +11,9 @@ namespace DIALOGUE
         private ConversationManager conversationManager;
         private TextArchitect architect;
 
+        public delegate void DialogueSystemEvent();
+        public event DialogueSystemEvent onUserPrompt_Next;
+
         public static DialogueSystem instance;
 
         public bool isRunningConversation => conversationManager.isRunning;
@@ -26,6 +29,7 @@ namespace DIALOGUE
                 DestroyImmediate(gameObject);
         }
 
+        // initialize the class only once if not initialized already
         bool _initialized = false;
         private void Initialize()
         {
@@ -36,12 +40,18 @@ namespace DIALOGUE
             conversationManager = new ConversationManager(architect);
         }
 
+        public void OnUserPrompt_Next()
+        {
+            onUserPrompt_Next?.Invoke();
+
+        }
+
         public void ShowSpeakerName(string speakerName = "") => dialogueContainer.nameContainer.Show(speakerName);
         public void HideSpeakerName() => dialogueContainer.nameContainer.Hide();
 
         public void Say(string speaker, string dialogue)
         {
-            List<string> conversation = new List<string> { $"{speaker} \"{dialogue}\""};
+            List<string> conversation = new List<string>() { $"{speaker} \"{dialogue}\""};
             Say(conversation);
         }
 

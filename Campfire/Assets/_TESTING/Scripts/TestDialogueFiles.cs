@@ -8,9 +8,9 @@ public class TestDialogueFiles : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
-        {
-            StartConversation();
-        }
+    {
+        StartConversation();
+    }
 
     void StartConversation()
     {

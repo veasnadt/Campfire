@@ -1,6 +1,4 @@
-John "Hello World!" list(items)
-
-setScene("Classroom" -s)
+John "Hello World!" list(items -h)
 
 Jerry "Hey, didn't you say \"Hello world!\" like 5 minutes ago?"
 

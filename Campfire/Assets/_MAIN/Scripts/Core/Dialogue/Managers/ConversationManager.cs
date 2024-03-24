@@ -9,12 +9,18 @@ namespace DIALOGUE{
         private Coroutine process = null;
         public bool isRunning => process != null;
         private TextArchitect architect = null;
+        private bool userPrompt = false;
 
         public ConversationManager(TextArchitect architect)
         {
             this.architect = architect;
+            dialogueSystem.onUserPrompt_Next += OnUserPrompt_Next;
         }
        
+       private void OnUserPrompt_Next()
+       {
+            userPrompt = true;
+       }
         public void StartConversation(List<string> conversation)
         {
             StopConversation();
@@ -34,7 +40,7 @@ namespace DIALOGUE{
         IEnumerator RunningConversation(List<string> conversation)
         {
             //Don't display blank lines or run logic on them.
-            for(int i = 0; i < conversation.Count; i++)
+            for (int i = 0; i < conversation.Count; i++)
             {
                 if (string.IsNullOrWhiteSpace(conversation[i]))
                     continue;
@@ -48,6 +54,8 @@ namespace DIALOGUE{
                 //Run any commands
                 if (line.hasCommands)
                     yield return Line_RunCommands(line);
+
+                yield return new WaitForSeconds(1);
             }
         }
 
@@ -60,12 +68,43 @@ namespace DIALOGUE{
                 dialogueSystem.HideSpeakerName();
 
             //Build dialogue
-            architect.
-            yield return null;
+            architect.Build(line.dialogue);
+
+            while (architect.isBuilding)
+            {
+                if (!architect.hurryUp)
+                    architect.hurryUp = true;
+                else
+                    architect.ForceComplete();
+
+                userPrompt = false;
+                
+                yield return BuildDialogue(line.dialogue);
+            }
         }
 
         IEnumerator Line_RunCommands(DIALOGUE_LINE line)
         {
+            Debug.Log(line.commands);
+            yield return null;
+        }
+
+        IEnumerator BuildDialogue(string dialogue)
+        {
+            architect.Build(dialogue);
+
+            while (architect.isBuilding)
+            {
+                if (userPrompt)
+                {
+                    if (!architect.hurryUp)
+                        architect.hurryUp = false;
+                    else 
+                        architect.ForceComplete();
+
+                    userPrompt = false;
+                }
+            }
             yield return null;
         }
     }
